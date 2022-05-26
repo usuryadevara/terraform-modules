@@ -34,3 +34,28 @@ variable "maintenance_contact" {
   type        = string
   default     = "esmddevsecops@unissant.com"
 }
+
+## S3 variables ##
+variable "epor_esmd_policy" {
+  type        = string
+  default     = ""
+  description = "epor esmd Bucket policy"
+}
+
+variable "esmd_epor_policy" {
+  type        = string
+  default     = ""
+  description = "esmd epor Bucket policy"
+}
+
+variable "esmd_payload_policy" {
+  type        = string
+  default     = ""
+  description = "esmd payload Bucket policy"
+}
+
+variable "esmd_qurantine_policy" {
+  type        = string
+  default     = ""
+  description = "esmd qurantine Bucket policy"
+}

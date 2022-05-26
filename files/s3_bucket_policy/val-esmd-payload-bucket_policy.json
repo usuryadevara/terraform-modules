@@ -1,0 +1,31 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::val-esmd-payload-process/*",
+            "Condition": {
+                "StringNotEquals": {
+                    "aws:sourceVpce": "vpce-037ea0358e98a42fb"
+                }
+            }
+        },
+        {
+            "Sid": "AllowSSLRequestsOnly",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::val-esmd-payload-process",
+                "arn:aws:s3:::val-esmd-payload-process/*"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        }
+    ]
+}

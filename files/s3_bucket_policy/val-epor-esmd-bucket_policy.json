@@ -1,0 +1,50 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Bucket Permissions",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::681062179728:role/ep_role_epor"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:DeleteObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::val-epor-esmd-bucket",
+                "arn:aws:s3:::val-epor-esmd-bucket/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::174393543144:root"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::val-epor-esmd-bucket/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:sourceVpce": "vpce-037ea0358e98a42fb"
+                }
+            }
+        },
+        {
+            "Sid": "AllowSSLRequestsOnly",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::val-epor-esmd-bucket",
+                "arn:aws:s3:::val-epor-esmd-bucket/*"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        }
+    ]
+}

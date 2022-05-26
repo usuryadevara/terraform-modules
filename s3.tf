@@ -1,7 +1,8 @@
 module "s3_bucket" {
+  #for_each = toset([local.epor-esmd-bucket, local.esmd-epor-bucket , local.esmd-payload-process, local.esmd-qurantine])
+  for_each = toset(["${var.env_type}-epor-esmd-bucket", "${var.env_type}-esmd-epor-bucket", "${var.env_type}-esmd-payload-process", "${var.env_type}-esmd-qurantine"])
   source = "./modules/s3"
-
-  bucket = "tf-unissant-test-bkt-modulestest"
+  bucket = "${each.key}"
   force_destroy = true
   acl    = "private"
 
@@ -26,8 +27,29 @@ module "s3_bucket" {
   
   tags = merge(
     {
-      Name = "tf-unissant-test-bkt-modulestest"
+      Name = "tf-${each.key}"
     },
     local.common_tags,
     )
+}
+
+resource "aws_s3_bucket_policy" "epor_esmd_policy" {
+  bucket = "${var.env_type}-epor-esmd-bucket"
+  policy = file (var.epor_esmd_policy)
+  #policy = file ("files/s3_bucket_policy/iac-epor-esmd-bucket_policy.json")
+}
+
+resource "aws_s3_bucket_policy" "esmd_epor_policy" {
+  bucket = "${var.env_type}-esmd-epor-bucket"
+  policy = file (var.esmd_epor_policy)
+}
+
+resource "aws_s3_bucket_policy" "esmd_payload_policy" {
+  bucket = "${var.env_type}-esmd-payload-process"
+  policy = file (var.esmd_payload_policy)
+}
+
+resource "aws_s3_bucket_policy" "esmd_qurantine_policy" {
+  bucket = "${var.env_type}-esmd-qurantine"
+  policy = file (var.esmd_qurantine_policy)
 }

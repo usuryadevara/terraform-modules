@@ -1,0 +1,48 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Bucket Permissions",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:DeleteObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::iac-esmd-qurantine",
+                "arn:aws:s3:::iac-esmd-qurantine/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::030556409702:root"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::iac-esmd-qurantine/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:sourceVpce": "vpce-0b87a063fd8ee13cd"
+                }
+            }
+        },
+        {
+            "Sid": "AllowSSLRequestsOnly",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::iac-esmd-qurantine",
+                "arn:aws:s3:::iac-esmd-qurantine/*"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        }
+    ]
+}
