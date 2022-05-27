@@ -8,7 +8,10 @@ $git clone https://repourl
 $terraform init
 $terraform workspace new {dev/val/uat/prod}
 $terraform workspace select dev
+$terraform plan -target=module.ecs_cluste
+
 $terraform plan -var-file=-var-file=workspaces/dev/dev.tfvars
 $terraform apply -var-file=-var-file=workspaces/dev/dev.tfvars
 $terraform destroy -var-file=-var-file=workspaces/dev/dev.tfvars
+$terraform destroy -target=module.ecs_cluster
 ````
