@@ -59,3 +59,52 @@ variable "esmd_qurantine_policy" {
   default     = ""
   description = "esmd qurantine Bucket policy"
 }
+
+## Security Groups ##
+variable "vpcid" {
+  type        = string
+  default     = ""
+  description = "Enter the VPC ID for Security Group"
+}
+
+variable "dz_trusted_ip_subnets" {
+  type        = list(string)
+  default     = []
+  description = "DZ Trusted subnets"
+}
+
+variable "az_trusted_ip_subnets" {
+  type        = list(string)
+  default     = []
+  description = "AZ private Trusted subnets"
+}
+
+variable "pz_trusted_ip_subnets" {
+  type        = list(string)
+  default     = []
+  description = "PZ private Trusted subnets"
+}
+
+variable "greenfield_epor_az1_az2"{
+  type        = list(string)
+  default     = []
+  description = "greenfield_epor_az1_az2"
+}
+
+variable "greenfield_epor_az3"{
+  type        = list(string)
+  default     = []
+  description = "greenfield_epor_az3"
+}
+
+variable "greenfield_legacy"{
+  type        = list(string)
+  default     = []
+  description = "greenfield_legacy"
+}
+
+variable "vpc_cidr1_2"{
+  type        = list(string)
+  default     = []
+  description = "vpc_cidr1_2"
+}

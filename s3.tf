@@ -36,20 +36,23 @@ module "s3_bucket" {
 resource "aws_s3_bucket_policy" "epor_esmd_policy" {
   bucket = "${var.env_type}-epor-esmd-bucket"
   policy = file (var.epor_esmd_policy)
-  #policy = file ("files/s3_bucket_policy/iac-epor-esmd-bucket_policy.json")
+  depends_on = [module.s3_bucket]
 }
 
 resource "aws_s3_bucket_policy" "esmd_epor_policy" {
   bucket = "${var.env_type}-esmd-epor-bucket"
   policy = file (var.esmd_epor_policy)
+  depends_on = [module.s3_bucket]
 }
 
 resource "aws_s3_bucket_policy" "esmd_payload_policy" {
   bucket = "${var.env_type}-esmd-payload-process"
   policy = file (var.esmd_payload_policy)
+  depends_on = [module.s3_bucket]
 }
 
 resource "aws_s3_bucket_policy" "esmd_qurantine_policy" {
   bucket = "${var.env_type}-esmd-qurantine"
   policy = file (var.esmd_qurantine_policy)
+  depends_on = [module.s3_bucket]
 }
