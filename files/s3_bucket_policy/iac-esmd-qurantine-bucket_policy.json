@@ -4,7 +4,9 @@
         {
             "Sid": "Bucket Permissions",
             "Effect": "Allow",
-            "Principal": "*",
+            "Principal": {
+                "AWS": "arn:aws:iam::030556409702:root"
+            },
             "Action": [
                 "s3:GetObject",
                 "s3:ListBucket",
