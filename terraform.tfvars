@@ -13,3 +13,12 @@ greenfield_epor_az1_az2 = ["10.0.101.0/24", "10.0.102.0/24"]
 greenfield_epor_az3 = ["10.0.101.0/24"]
 greenfield_legacy = ["10.0.102.0/24"]
 vpc_cidr1_2 = ["10.0.101.0/24", "10.0.102.0/24"]
+
+parameter_write = [
+  {
+    name      = "/iac/test/parameter/uns-iac"
+    value     = "iac,unissant"
+    type      = "StringList"
+    overwrite = "true"
+  }
+]
